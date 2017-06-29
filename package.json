@@ -1,0 +1,48 @@
+{
+  "name": "serverless-stack-output",
+  "description": "Serverless plugin to process AWS CloudFormation Stack Output",
+  "license": "MIT",
+  "author": "Sebastian Müller <mail@sbstjn.com>",
+  "main": "src/plugin.js",
+  "scripts": {
+    "test": "jest test",
+    "test:cover": "jest test --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "lint": "standard | snazzy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbstjn/serverless-stack-output.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sbstjn/serverless-stack-output/issues"
+  },
+  "homepage": "https://github.com/sbstjn/serverless-stack-output#readme",
+  "keywords": [
+    "serverless",
+    "plugin",
+    "aws",
+    "cloudformation",
+    "stack",
+    "output"
+  ],
+  "dependencies": {
+    "tomlify-j0.4": "^2.0.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "coveralls": "^2.13.1",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.2"
+  },
+  "standard": {
+    "envs": [
+      "node",
+      "jest"
+    ],
+    "ignore": [
+      "node_modules/",
+      "coverage"
+    ]
+  }
+}
