@@ -5,8 +5,8 @@
   "author": "Sebastian Müller <mail@sbstjn.com>",
   "main": "src/plugin.js",
   "scripts": {
-    "test": "jest test",
-    "test:cover": "jest test --coverage",
+    "test": "yarn lint && jest test",
+    "test:cover": "yarn lint && jest test --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "standard | snazzy"
   },
@@ -27,6 +27,9 @@
     "output"
   ],
   "dependencies": {
+    "jasmine-data-provider": "^2.2.0",
+    "nativefier": "^7.4.0",
+    "sinon": "^2.3.6",
     "tomlify-j0.4": "^2.0.0",
     "yamljs": "^0.3.0"
   },

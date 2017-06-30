@@ -28,7 +28,7 @@ class Plugin {
   }
 
   hasConfig (key) {
-    return this.serverless.service.custom.output || !!this.serverless.service.custom.output[key]
+    return !!this.serverless.service.custom.output && !!this.serverless.service.custom.output[key]
   }
 
   hasHandler () {
