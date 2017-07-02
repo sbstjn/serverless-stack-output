@@ -28,7 +28,7 @@ plugins:
 custom:
   output:
     handler: scripts/output.handler # Same syntax as you already know
-    store: .build/stack.toml # toml, yaml, and json format is available
+    file: .build/stack.toml # toml, yaml, yml, and json format is available
 ```
 
 ### Handler
@@ -45,7 +45,7 @@ module.exports = { handler }
 
 ### File Formats
 
-Just name your file with a `.json`, `.toml`, or `.yaml` extension, and the plugin will take care of formatting your output. Please make sure the location where you want to save the file exists!
+Just name your file with a `.json`, `.toml`, `.yaml`, or `.yml` extension, and the plugin will take care of formatting your output. Please make sure the location where you want to save the file exists!
 
 ## License
 
