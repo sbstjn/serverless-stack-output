@@ -24,7 +24,7 @@ class Plugin {
   }
 
   get stackName () {
-    return this.serverless.service.service + '-' + this.options.stage
+    return this.serverless.service.service + '-' + this.serverless.getProvider('aws').getStage()
   }
 
   hasConfig (key) {
@@ -71,8 +71,8 @@ class Plugin {
       {
         StackName: this.stackName
       },
-      this.options.stage,
-      this.options.region
+      this.serverless.getProvider('aws').getStage(),
+      this.serverless.getProvider('aws').getRegion()
     )
   }
 
