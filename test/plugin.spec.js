@@ -25,6 +25,9 @@ describe('Plugin', () => {
   describe('Configuration', () => {
     it('hasHandler', () => {
       const config = {
+        config: {
+          servicePath: ''
+        },
         cli: { log: () => {} },
         region: 'us-east-1',
         service: {
@@ -44,12 +47,17 @@ describe('Plugin', () => {
 
       expect(test.hasHandler()).toBe(true)
       expect(test.hasFile()).toBe(false)
+
+      expect(test.handler).toContain('foo/bar.baz')
     })
   })
 
   describe('Configuration', () => {
     it('hasFile', () => {
       const config = {
+        config: {
+          servicePath: ''
+        },
         cli: { log: () => {} },
         region: 'us-east-1',
         service: {
@@ -58,7 +66,7 @@ describe('Plugin', () => {
           },
           custom: {
             output: {
-              file: './foo/bar.toml'
+              file: 'foo/bar.toml'
             }
           }
         },
@@ -69,6 +77,8 @@ describe('Plugin', () => {
 
       expect(test.hasHandler()).toBe(false)
       expect(test.hasFile()).toBe(true)
+
+      expect(test.file).toContain('foo/bar.toml')
     })
   })
 })

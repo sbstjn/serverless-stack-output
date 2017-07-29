@@ -75,7 +75,7 @@ package:
 
 custom:
   output:
-    handler: scripts/output.handle
+    handler: scripts/output.handler
     file: .build/stack.toml
 
 provider:
