@@ -1,12 +1,12 @@
 'use strict'
 
-const using = require('jasmine-data-provider')
-const File = require('../src/file.js')
+import * as using from 'jasmine-data-provider'
+import OutputFile from '../src/OutputFile'
 
 describe('File', () => {
   describe('Constructor', () => {
     it('pass path', () => {
-      const f = new File(__dirname)
+      const f = new OutputFile(__dirname)
       expect(f.path).toBe(__dirname)
     })
   })
@@ -20,9 +20,9 @@ describe('File', () => {
         {file: 'test.toml', valid: true, type: 'toml', data: 'foo = "bar"'},
         {file: 'test.zip', valid: false}
       ],
-      data => {
+      (data) => {
         it('detects' + (data.valid ? ' valid ' : ' invalid ') + data.file, () => {
-          const f = new File(data.file)
+          const f = new OutputFile(data.file)
 
           if (data.valid) {
             expect(f.format({ foo: 'bar' })).toBe(data.data)

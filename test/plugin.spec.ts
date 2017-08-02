@@ -1,12 +1,12 @@
 'use strict'
 
-const sinon = require('sinon')
-const Plugin = require('../')
+import * as sinon from 'sinon'
+import * as  Plugin from '../src/Plugin'
 
 describe('Plugin', () => {
   let providerMock = null
   let getProvider = null
-  let provider = {
+  const provider = {
     request: () => true,
     sdk: {
       VERSION: '2.21.0'
@@ -25,22 +25,22 @@ describe('Plugin', () => {
   describe('Configuration', () => {
     it('hasHandler', () => {
       const config = {
+        cli: { log: () => null },
         config: {
           servicePath: ''
         },
-        cli: { log: () => {} },
+        getProvider,
         region: 'us-east-1',
         service: {
-          provider: {
-            name: 'aws'
-          },
           custom: {
             output: {
               handler: 'foo/bar.baz'
             }
+          },
+          provider: {
+            name: 'aws'
           }
-        },
-        getProvider
+        }
       }
 
       const test = new Plugin(config)
@@ -55,22 +55,22 @@ describe('Plugin', () => {
   describe('Configuration', () => {
     it('hasFile', () => {
       const config = {
+        cli: { log: () => null },
         config: {
           servicePath: ''
         },
-        cli: { log: () => {} },
+        getProvider,
         region: 'us-east-1',
         service: {
-          provider: {
-            name: 'aws'
-          },
           custom: {
             output: {
               file: 'foo/bar.toml'
             }
+          },
+          provider: {
+            name: 'aws'
           }
-        },
-        getProvider
+        }
       }
 
       const test = new Plugin(config)
