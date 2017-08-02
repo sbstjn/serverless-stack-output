@@ -1,12 +1,10 @@
-const fs = require('fs')
+import * as fs from 'fs'
 
-class File {
-  constructor (path) {
-    this.path = path
-  }
+export default class StackOutputFile {
+  constructor (private path: string) { }
 
-  format (data) {
-    const ext = this.path.split('.').pop()
+  public format (data: {}) {
+    const ext = this.path.split('.').pop() || ''
 
     switch (ext.toUpperCase()) {
       case 'JSON':
@@ -21,7 +19,7 @@ class File {
     }
   }
 
-  save (data) {
+  public save (data: {}) {
     const content = this.format(data)
 
     try {
@@ -31,5 +29,3 @@ class File {
     }
   }
 }
-
-module.exports = File

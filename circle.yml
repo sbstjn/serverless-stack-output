@@ -10,9 +10,12 @@ test:
   pre:
     - yarn lint
   override:
+    - yarn build
     - yarn test:cover
   post:
     - yarn coveralls
+  cache_directories:
+    - ~/.cache/yarn
 
 deployment:
   release:

@@ -1,7 +1,7 @@
 'use strict'
 
-const using = require('jasmine-data-provider')
-const File = require('../src/file.js')
+import * as using from 'jasmine-data-provider'
+import File from '../src/file'
 
 describe('File', () => {
   describe('Constructor', () => {
@@ -20,7 +20,7 @@ describe('File', () => {
         {file: 'test.toml', valid: true, type: 'toml', data: 'foo = "bar"'},
         {file: 'test.zip', valid: false}
       ],
-      data => {
+      (data) => {
         it('detects' + (data.valid ? ' valid ' : ' invalid ') + data.file, () => {
           const f = new File(data.file)
 

@@ -3,12 +3,13 @@
   "description": "Serverless plugin to process AWS CloudFormation Stack Output",
   "license": "MIT",
   "author": "Sebastian Müller <mail@sbstjn.com>",
-  "main": "src/plugin.js",
+  "main": "dist/plugin.js",
   "scripts": {
-    "test": "yarn lint && jest test",
-    "test:cover": "yarn lint && jest test --coverage",
+    "test": "jest",
+    "test:cover": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "lint": "standard | snazzy"
+    "lint": "tslint {src,test}/**/*.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -27,27 +28,29 @@
     "output"
   ],
   "dependencies": {
-    "jasmine-data-provider": "^2.2.0",
-    "nativefier": "^7.4.0",
-    "sinon": "^2.3.6",
     "tomlify-j0.4": "^2.0.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "sinon": "^2.3.6",
+    "jasmine-data-provider": "^2.2.0",
+    "@types/jest": "^20.0.5",
+    "@types/node": "^8.0.19",
     "coveralls": "^2.13.1",
     "dot-json": "^1.0.3",
     "jest": "^20.0.4",
-    "snazzy": "^7.0.0",
-    "standard": "^10.0.2"
+    "ts-jest": "^20.0.7",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.2"
   },
-  "standard": {
-    "envs": [
-      "node",
-      "jest"
-    ],
-    "ignore": [
-      "node_modules/",
-      "coverage"
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
     ]
   }
 }
