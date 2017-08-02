@@ -1,7 +1,7 @@
 'use strict'
 
 import * as sinon from 'sinon'
-import Plugin from '../src/plugin'
+import * as Plugin from '../src/plugin'
 
 describe('Plugin', () => {
   let providerMock = null

@@ -28,13 +28,12 @@
     "output"
   ],
   "dependencies": {
-    "jasmine-data-provider": "^2.2.0",
-    "nativefier": "^7.4.0",
-    "sinon": "^2.3.6",
     "tomlify-j0.4": "^2.0.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "sinon": "^2.3.6",
+    "jasmine-data-provider": "^2.2.0",
     "@types/jest": "^20.0.5",
     "@types/node": "^8.0.19",
     "coveralls": "^2.13.1",

@@ -3,7 +3,7 @@ import * as  util from 'util'
 
 import StackOutputFile from './file'
 
-export default class StackOutputPlugin {
+class StackOutputPlugin {
   private hooks: {}
   private output: OutputConfig
 
@@ -136,3 +136,5 @@ export default class StackOutputPlugin {
     )
   }
 }
+
+module.exports = StackOutputPlugin
