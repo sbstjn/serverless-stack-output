@@ -1,12 +1,12 @@
 'use strict'
 
 import * as using from 'jasmine-data-provider'
-import OutputFile from '../src/OutputFile'
+import File from '../src/file'
 
 describe('File', () => {
   describe('Constructor', () => {
     it('pass path', () => {
-      const f = new OutputFile(__dirname)
+      const f = new File(__dirname)
       expect(f.path).toBe(__dirname)
     })
   })
@@ -22,7 +22,7 @@ describe('File', () => {
       ],
       (data) => {
         it('detects' + (data.valid ? ' valid ' : ' invalid ') + data.file, () => {
-          const f = new OutputFile(data.file)
+          const f = new File(data.file)
 
           if (data.valid) {
             expect(f.format({ foo: 'bar' })).toBe(data.data)

@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 
-export default class OutputFile {
+export default class StackOutputFile {
   constructor (private path: string) { }
 
   public format (data: {}) {

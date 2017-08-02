@@ -1,10 +1,10 @@
-declare interface StackOutput {
+declare interface StackOutputPair {
   OutputKey: string
   OutputValue: string
 }
 
 declare interface StackDescription {
-  Outputs: StackOutput[]
+  Outputs: StackOutputPair[]
 }
 
 declare interface StackDescriptionList {
@@ -14,8 +14,4 @@ declare interface StackDescriptionList {
 declare interface OutputConfig {
   handler: string
   file: string
-}
-
-declare interface CustomConfig {
-  output: OutputConfig
 }

@@ -1,9 +1,9 @@
 import * as  assert from 'assert'
 import * as  util from 'util'
 
-import OutputFile from './OutputFile'
+import StackOutputFile from './file'
 
-class OutputPlugin {
+export default class StackOutputPlugin {
   private hooks: {}
   private output: OutputConfig
 
@@ -12,8 +12,7 @@ class OutputPlugin {
       'after:deploy:deploy': () => this.process()
     }
 
-    const custom: CustomConfig = this.serverless.service.custom
-    this.output = custom.output
+    this.output = this.serverless.service.custom.output
   }
 
   get file () {
@@ -56,7 +55,7 @@ class OutputPlugin {
   }
 
   private saveFile (data: {}) {
-    const f = new OutputFile(this.file)
+    const f = new StackOutputFile(this.file)
 
     return new Promise((resolve) => {
       f.save(data)
@@ -82,7 +81,7 @@ class OutputPlugin {
     const output = stack.Outputs || []
 
     return output.reduce(
-      (obj: {}, item: StackOutput) => Object.assign(obj, {[item.OutputKey]: item.OutputValue}),
+      (obj: {}, item: StackOutputPair) => Object.assign(obj, {[item.OutputKey]: item.OutputValue}),
       {}
     )
   }
@@ -137,5 +136,3 @@ class OutputPlugin {
     )
   }
 }
-
-module.exports = OutputPlugin
