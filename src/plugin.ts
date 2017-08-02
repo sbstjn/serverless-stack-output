@@ -4,12 +4,12 @@ import * as  util from 'util'
 import StackOutputFile from './file'
 
 class StackOutputPlugin {
-  private hooks: {}
+  public hooks: {}
   private output: OutputConfig
 
   constructor (private serverless: Serverless, private options: Serverless.Options) {
     this.hooks = {
-      'after:deploy:deploy': () => this.process()
+      'after:deploy:deploy': this.process.bind(this)
     }
 
     this.output = this.serverless.service.custom.output
@@ -123,6 +123,8 @@ class StackOutputPlugin {
   }
 
   private process () {
+    console.log('running stack-output-plugin')
+
     return Promise.resolve().then(
       () => this.validate()
     ).then(
