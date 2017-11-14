@@ -1,6 +1,5 @@
-'use strict'
-
 import * as sinon from 'sinon'
+
 import Plugin from '../src/plugin'
 
 describe('Plugin', () => {

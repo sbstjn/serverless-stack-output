@@ -7,7 +7,10 @@ export default class StackOutputPlugin {
   public hooks: {}
   private output: OutputConfig
 
-  constructor (private serverless: Serverless, private options: Serverless.Options) {
+  constructor (
+    private serverless: Serverless,
+    private options: Serverless.Options
+  ) {
     this.hooks = {
       'after:deploy:deploy': this.process.bind(this)
     }
@@ -24,7 +27,10 @@ export default class StackOutputPlugin {
   }
 
   get stackName () {
-    return this.serverless.service.getServiceName() + '-' + this.serverless.getProvider('aws').getStage()
+    return util.format('%s-%s',
+      this.serverless.service.getServiceName(),
+      this.serverless.getProvider('aws').getStage()
+    )
   }
 
   private hasConfig (key: string) {
@@ -40,7 +46,10 @@ export default class StackOutputPlugin {
   }
 
   private getConfig (key: string) {
-    return this.serverless.config.servicePath + '/' + this.output[key]
+    return util.format('%s/%s',
+      this.serverless.config.servicePath,
+      this.output[key]
+    )
   }
 
   private callHandler (data: object) {
@@ -57,21 +66,17 @@ export default class StackOutputPlugin {
     return Promise.resolve()
   }
 
-  private saveFile (data: {}) {
+  private saveFile (data: object) {
     const f = new StackOutputFile(this.file)
 
-    f.save(data)
-
-    return Promise.resolve()
+    return f.save(data)
   }
 
   private fetch (): Promise<StackDescriptionList> {
     return this.serverless.getProvider('aws').request(
       'CloudFormation',
       'describeStacks',
-      {
-        StackName: this.stackName
-      },
+      { StackName: this.stackName },
       this.serverless.getProvider('aws').getStage(),
       this.serverless.getProvider('aws').getRegion()
     )
@@ -82,35 +87,43 @@ export default class StackOutputPlugin {
     const output = stack.Outputs || []
 
     return output.reduce(
-      (obj: {}, item: StackOutputPair) => Object.assign(obj, {[item.OutputKey]: item.OutputValue}),
-      {}
+      (obj: {}, item: StackOutputPair) => (
+        Object.assign(obj, { [item.OutputKey]: item.OutputValue })
+      ), {}
     )
   }
 
-  private handle (data: {}) {
-    const promises = []
+  private handle (data: object) {
+    return Promise.all(
+      [
+        this.handleHandler(data),
+        this.handleFile(data)
+      ]
+    )
+  }
 
-    if (this.hasHandler()) {
-      promises.push(
-        this.callHandler(data).then(
-          () => this.serverless.cli.log(
-            util.format('Stack Output processed with handler: %s', this.output.handler)
-          )
+  private handleHandler(data: object) {
+    return this.hasHandler() ? (
+      this.callHandler(
+        data
+      ).then(
+        () => this.serverless.cli.log(
+          util.format('Stack Output processed with handler: %s', this.output.handler)
         )
       )
-    }
+    ) : Promise.resolve()
+  }
 
-    if (this.hasFile()) {
-      promises.push(
-        this.saveFile(data).then(
-          () => this.serverless.cli.log(
-            util.format('Stack Output saved to file: %s', this.output.file)
-          )
+  private handleFile(data: object) {
+    return this.hasFile() ? (
+      this.saveFile(
+        data
+      ).then(
+        () => this.serverless.cli.log(
+          util.format('Stack Output saved to file: %s', this.output.file)
         )
       )
-    }
-
-    return Promise.all(promises)
+    ) : Promise.resolve()
   }
 
   private validate () {
@@ -130,11 +143,11 @@ export default class StackOutputPlugin {
     ).then(
       () => this.fetch()
     ).then(
-      res => this.beautify(res)
+      (res) => this.beautify(res)
     ).then(
-      res => this.handle(res)
+      (res) => this.handle(res)
     ).catch(
-      err => this.serverless.cli.log(
+      (err) => this.serverless.cli.log(
         util.format('Cannot process Stack Output: %s!', err.message)
       )
     )

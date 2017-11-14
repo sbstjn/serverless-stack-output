@@ -1,9 +1,11 @@
 import * as fs from 'fs'
 
 export default class StackOutputFile {
-  constructor (private path: string) { }
+  constructor (
+    public path: string
+  ) { }
 
-  public format (data: {}) {
+  public format (data: object) {
     const ext = this.path.split('.').pop() || ''
 
     switch (ext.toUpperCase()) {
@@ -19,7 +21,7 @@ export default class StackOutputFile {
     }
   }
 
-  public save (data: {}) {
+  public save (data: object) {
     const content = this.format(data)
 
     try {
@@ -27,5 +29,7 @@ export default class StackOutputFile {
     } catch (e) {
       throw new Error('Cannot write to file: ' + this.path)
     }
+
+    return Promise.resolve()
   }
 }

@@ -1,6 +1,6 @@
-'use strict'
-
 import * as using from 'jasmine-data-provider'
+import * as util from 'util'
+
 import File from '../src/file'
 
 describe('File', () => {
@@ -21,13 +21,20 @@ describe('File', () => {
         {file: 'test.zip', valid: false}
       ],
       (data) => {
-        it('detects' + (data.valid ? ' valid ' : ' invalid ') + data.file, () => {
+        const name = util.format(
+          'detects %s %s',
+          data.valid ? 'valid' : 'invalid',
+          data.file
+        )
+
+        it(name, () => {
           const f = new File(data.file)
+          const output = { foo: 'bar' }
 
           if (data.valid) {
-            expect(f.format({ foo: 'bar' })).toBe(data.data)
+            expect(f.format(output)).toBe(data.data)
           } else {
-            expect(() => f.format()).toThrow()
+            expect(() => f.format(output)).toThrow()
           }
         })
       }
