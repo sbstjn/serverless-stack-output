@@ -36,7 +36,7 @@ custom:
 Based on the configuration above the plugin will search for a file `scripts/output.js` with the following content:
 
 ```js
-function handler (data) {
+function handler (data, serverless) {
   console.log('Received Stack Output', data)
 }
 
