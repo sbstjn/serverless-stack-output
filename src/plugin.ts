@@ -1,9 +1,9 @@
-import * as  assert from 'assert'
-import * as  util from 'util'
+import * as assert from 'assert'
+import * as util from 'util'
 
 import StackOutputFile from './file'
 
-class StackOutputPlugin {
+export default class StackOutputPlugin {
   public hooks: {}
   private output: OutputConfig
 
@@ -43,30 +43,26 @@ class StackOutputPlugin {
     return this.serverless.config.servicePath + '/' + this.output[key]
   }
 
-  private callHandler (data: {}) {
+  private callHandler (data: object) {
     const splits = this.handler.split('.')
     const func = splits.pop() || ''
     const file = splits.join('.')
 
-    return new Promise(resolve => {
-      require(file)[func](
-        data,
-        this.serverless,
-        this.options
-      )
+    require(file)[func](
+      data,
+      this.serverless,
+      this.options
+    )
 
-      resolve()
-    })
+    return Promise.resolve()
   }
 
   private saveFile (data: {}) {
     const f = new StackOutputFile(this.file)
 
-    return new Promise((resolve) => {
-      f.save(data)
+    f.save(data)
 
-      resolve()
-    })
+    return Promise.resolve()
   }
 
   private fetch (): Promise<StackDescriptionList> {
@@ -128,20 +124,19 @@ class StackOutputPlugin {
   }
 
   private process () {
-    console.log('running stack-output-plugin')
-
-    return Promise.resolve().then(
+    Promise.resolve()
+    .then(
       () => this.validate()
     ).then(
       () => this.fetch()
     ).then(
-      (res: StackDescriptionList) => this.beautify(res)
+      res => this.beautify(res)
     ).then(
-      (res) => this.handle(res)
+      res => this.handle(res)
     ).catch(
-      (err) => this.serverless.cli.log(util.format('Cannot process Stack Output: %s!', err.message))
+      err => this.serverless.cli.log(
+        util.format('Cannot process Stack Output: %s!', err.message)
+      )
     )
   }
 }
-
-module.exports = StackOutputPlugin

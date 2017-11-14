@@ -1,7 +1,7 @@
 'use strict'
 
 import * as sinon from 'sinon'
-import * as Plugin from '../src/plugin'
+import Plugin from '../src/plugin'
 
 describe('Plugin', () => {
   let providerMock = null
@@ -43,7 +43,7 @@ describe('Plugin', () => {
         }
       }
 
-      const test = new Plugin(config)
+      const test = new Plugin(config, { serverless: true }, { options: true })
 
       expect(test.hasHandler()).toBe(true)
       expect(test.hasFile()).toBe(false)
