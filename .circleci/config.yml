@@ -17,6 +17,7 @@ whitelist: &whitelist
     - README.md
     - tsconfig.json
     - tslint.json
+    - yarn.lock
 version: 2
 jobs:
   checkout:
