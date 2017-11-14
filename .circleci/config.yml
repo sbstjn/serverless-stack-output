@@ -11,6 +11,7 @@ whitelist: &whitelist
     - node_modules/*
     - src/*
     - test/*
+    - vendor/*
     - CODE_OF_CONDUCT.md
     - LICENSE.md
     - package.json
