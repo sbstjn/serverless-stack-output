@@ -48,7 +48,7 @@ class StackOutputPlugin {
     const func = splits.pop() || ''
 
     return new Promise((resolve) => {
-      require(splits.join('.'))[func](data)
+      require(splits.join('.'))[func](data, this.serverless)
 
       resolve()
     })
