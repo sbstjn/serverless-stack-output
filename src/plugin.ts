@@ -46,9 +46,14 @@ class StackOutputPlugin {
   private callHandler (data: {}) {
     const splits = this.handler.split('.')
     const func = splits.pop() || ''
+    const file = splits.join('.')
 
-    return new Promise((resolve) => {
-      require(splits.join('.'))[func](data, this.serverless)
+    return new Promise(resolve => {
+      require(file)[func](
+        data,
+        this.serverless,
+        this.options
+      )
 
       resolve()
     })
