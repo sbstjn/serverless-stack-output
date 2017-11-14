@@ -1,4 +1,4 @@
-import * as sinon from 'sinon'
+import sinon from 'sinon'
 
 import Plugin from '../src/plugin'
 

@@ -82,12 +82,12 @@ export default class StackOutputPlugin {
     )
   }
 
-  private beautify (data: {Stacks: Array<{ Outputs: Array<{}> }>}) {
+  private beautify (data: {Stacks: Array<{ Outputs: StackOutputPair[] }>}) {
     const stack = data.Stacks.pop() || { Outputs: [] }
     const output = stack.Outputs || []
 
     return output.reduce(
-      (obj: {}, item: StackOutputPair) => (
+      (obj, item: StackOutputPair) => (
         Object.assign(obj, { [item.OutputKey]: item.OutputValue })
       ), {}
     )

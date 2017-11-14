@@ -1,5 +1,5 @@
-import * as using from 'jasmine-data-provider'
-import * as util from 'util'
+import using from 'jasmine-data-provider'
+import util from 'util'
 
 import File from '../src/file'
 
