@@ -67,7 +67,7 @@ export default class StackOutputPlugin {
   }
 
   private saveFile (data: object) {
-    const f = new StackOutputFile(this.file)
+    const f = new StackOutputFile(this.file, this.output.format)
 
     return f.save(data)
   }

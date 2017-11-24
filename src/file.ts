@@ -2,13 +2,16 @@ import * as fs from 'fs'
 
 export default class StackOutputFile {
   constructor (
-    public path: string
+    public path: string,
+    public format: string
   ) { }
 
-  public format (data: object) {
+  public formatData (data: object) {
     const ext = this.path.split('.').pop() || ''
 
-    switch (ext.toUpperCase()) {
+    const format = this.format || ext;
+
+    switch (format.toUpperCase()) {
       case 'JSON':
         return JSON.stringify(data, null, 2)
       case 'TOML':
@@ -17,12 +20,12 @@ export default class StackOutputFile {
       case 'YML':
         return require('yamljs').stringify(data)
       default:
-        throw new Error('No formatter found for `' + ext + '` extension')
+        throw new Error('No formatter found for `' + format + '` extension')
     }
   }
 
   public save (data: object) {
-    const content = this.format(data)
+    const content = this.formatData(data)
 
     try {
       fs.writeFileSync(this.path, content)

@@ -31,6 +31,17 @@ custom:
     file: .build/stack.toml # toml, yaml, yml, and json format is available
 ```
 
+Optionally, you can provide a format explicitly which will allow you to choose
+any output filename. This format will override the implicit one from the file
+extension.
+
+```yaml
+custom:
+  output:
+    format: toml
+    file: .env
+```
+
 ### Handler
 
 Based on the configuration above the plugin will search for a file `scripts/output.js` with the following content:
