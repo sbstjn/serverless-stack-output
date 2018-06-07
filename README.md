@@ -162,3 +162,14 @@ ServerlessDeploymentBucketName: sls-stack-output-example-serverlessdeploymentbuc
   "ServerlessDeploymentBucketName": "sls-stack-output-example-serverlessdeploymentbuck-BucketID"
 }
 ```
+
+#### ENV
+
+```env
+ExampleUserSecret=YourUserSecretKey
+ExampleUserKey=YourUserAccessKey
+ExampleLambdaFunctionQualifiedArn=arn:aws:lambda:us-east-1:AccountID:function:sls-stack-output-example-dev-example:9
+ExampleStaticValue=example-static-value
+ServiceEndpoint=https://APIGatewayID.execute-api.us-east-1.amazonaws.com/dev
+ServerlessDeploymentBucketName=sls-stack-output-example-serverlessdeploymentbuck-BucketID
+```

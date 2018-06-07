@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 
 export default class StackOutputFile {
-  constructor (
+  constructor(
     public path: string
   ) { }
 
-  public format (data: object) {
+  public format(data: object) {
     const ext = this.path.split('.').pop() || ''
 
     switch (ext.toUpperCase()) {
@@ -16,12 +16,14 @@ export default class StackOutputFile {
       case 'YAML':
       case 'YML':
         return require('yamljs').stringify(data)
+      case 'ENV':
+        return Object.keys(data).map((key) => `${key}=${data[key]}`).join('\n')
       default:
         throw new Error('No formatter found for `' + ext + '` extension')
     }
   }
 
-  public save (data: object) {
+  public save(data: object) {
     const content = this.format(data)
 
     try {
