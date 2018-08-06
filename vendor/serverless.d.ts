@@ -13,6 +13,7 @@ declare namespace Serverless {
       getRegion: () => string
       getServerlessDeploymentBucketName: () => string
       getStage: () => string
+      getStackName: () => string
 
       request: (service: string, method: string, data: {}, stage: string, region: string) => Promise<any>
     }
