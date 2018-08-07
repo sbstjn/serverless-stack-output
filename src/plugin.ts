@@ -27,7 +27,7 @@ export default class StackOutputPlugin {
   }
 
   get stackName () {
-    return this.serverless.getProvider('aws').getStackName()
+    return this.serverless.getProvider('aws').naming.getStackName()
   }
 
   private hasConfig (key: string) {
