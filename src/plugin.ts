@@ -137,7 +137,7 @@ export default class StackOutputPlugin {
   }
 
   private process () {
-    Promise.resolve()
+    return Promise.resolve()
     .then(
       () => this.validate()
     ).then(
