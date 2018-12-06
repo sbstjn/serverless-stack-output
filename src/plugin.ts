@@ -57,13 +57,13 @@ export default class StackOutputPlugin {
     const func = splits.pop() || ''
     const file = splits.join('.')
 
-    require(file)[func](
-      data,
-      this.serverless,
-      this.options
-    )
-
-    return Promise.resolve()
+    return Promise.resolve().then(function() {
+      return require(file)[func](
+        data,
+        this.serverless,
+        this.options
+      );
+    });
   }
 
   private saveFile (data: object) {
