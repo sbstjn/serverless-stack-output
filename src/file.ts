@@ -16,6 +16,8 @@ export default class StackOutputFile {
       case 'YAML':
       case 'YML':
         return require('yamljs').stringify(data)
+      case 'PROPERTIES':
+        return require('properties').stringify(data)
       default:
         throw new Error('No formatter found for `' + ext + '` extension')
     }
