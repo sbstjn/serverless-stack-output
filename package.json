@@ -30,6 +30,7 @@
     "output"
   ],
   "dependencies": {
+    "properties": "^1.2.1",
     "tomlify-j0.4": "^2.0.0",
     "yamljs": "^0.3.0"
   },

@@ -18,6 +18,7 @@ describe('File', () => {
         {file: 'test.yml', valid: true, type: 'yaml', data: `foo: bar\n`},
         {file: 'test.json', valid: true, type: 'json', data: `{\n  "foo": "bar"\n}`},
         {file: 'test.toml', valid: true, type: 'toml', data: 'foo = "bar"'},
+        {file: 'test.properties', valid: true, type: 'properties', data: 'foo = bar'},
         {file: 'test.zip', valid: false}
       ],
       (data) => {
