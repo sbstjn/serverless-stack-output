@@ -15,7 +15,7 @@ export default class StackOutputFile {
       case 'JSON':
         return JSON.stringify(data, null, 2)
       case 'TOML':
-        return require('tomlify-j0.4')(data, null, 0)
+        return require('tomlify-j0.4')(data, null, 0).replace(/ /g, "")
       case 'YAML':
       case 'YML':
         return require('yamljs').stringify(data)
