@@ -136,8 +136,8 @@ export default class StackOutputPlugin {
     assert(this.options && !this.options.noDeploy, 'Skipping deployment with --noDeploy flag')
   }
 
-  private process () {
-    Promise.resolve()
+  private async process () {
+    await Promise.resolve()
     .then(
       () => this.validate()
     ).then(
