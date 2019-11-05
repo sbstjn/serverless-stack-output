@@ -15,6 +15,10 @@ declare namespace Serverless {
       getStage: () => string
 
       request: (service: string, method: string, data: {}, stage: string, region: string) => Promise<any>
+
+      naming: {
+        getStackName(): string
+      }
     }
   }
 }
