@@ -80,4 +80,31 @@ describe('Plugin', () => {
       expect(test.file).toContain('foo/bar.toml')
     })
   })
+
+  describe('Plugin attached to hooks', () => {
+    it('attached to after deploy and info hook', () => {
+      const config = {
+        cli: { log: () => null },
+        config: {
+          servicePath: ''
+        },
+        getProvider,
+        region: 'us-east-1',
+        service: {
+          custom: {
+            output: {
+              file: 'foo/bar.toml'
+            }
+          },
+          provider: {
+            name: 'aws'
+          }
+        }
+      }
+      const test = new Plugin(config)
+
+      expect(test.hooks).toHaveProperty('after:deploy:deploy')
+      expect(test.hooks).toHaveProperty('after:info:info')
+    })
+  })
 })

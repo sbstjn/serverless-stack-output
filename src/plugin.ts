@@ -12,7 +12,8 @@ export default class StackOutputPlugin {
     private options: Serverless.Options
   ) {
     this.hooks = {
-      'after:deploy:deploy': this.process.bind(this)
+      'after:deploy:deploy': this.process.bind(this),
+      'after:info:info': this.process.bind(this)
     }
 
     this.output = this.serverless.service.custom.output
