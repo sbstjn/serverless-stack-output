@@ -57,13 +57,13 @@ export default class StackOutputPlugin {
     const func = splits.pop() || ''
     const file = splits.join('.')
 
-    require(file)[func](
+    const res = require(file)[func](
       data,
       this.serverless,
       this.options
     )
 
-    return Promise.resolve()
+    return Promise.resolve(res)
   }
 
   private saveFile (data: object) {
@@ -137,7 +137,7 @@ export default class StackOutputPlugin {
   }
 
   private process () {
-    Promise.resolve()
+    return Promise.resolve()
     .then(
       () => this.validate()
     ).then(
